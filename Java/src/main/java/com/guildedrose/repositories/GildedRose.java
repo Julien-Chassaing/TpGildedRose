@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 public class GildedRose {
 
-    public void updateQuality(){
+    // Complexity Cyclomatic = 21
+    public void updateQuality(){ // 1
 
         int day = 10;
 
@@ -30,45 +31,45 @@ public class GildedRose {
         item4.setSellin(7);
         item4.setQuality(8);
 
-        Item items [] = {item1, item2, item3, item4};
+        Item[] items = {item1, item2, item3, item4};
 
-        for(int i = 0; i < day; i++){
-            for ( Item item : items) {
-                if(item.getNom() != "Sulfuras"){
-                    if(item.getSellin() != 0){
+        for(int i = 0; i < day; i++){ //1
+            for ( Item item : items) { //1
+                if(!item.getNom().equals("Sulfuras")){ //1
+                    if(item.getSellin() != 0){ //1
                         item.setSellin(item.getSellin() -1);
                     }
                     else{
                         item.setSellin(0);
                     }
                 }
-                if(item.getNom() == "Aged Brie"){
-                    if(item.getQuality() < 50){
+                if(item.getNom().equals("Aged Brie")){ //1
+                    if(item.getQuality() < 50){ //1
                         item.setQuality(item.getQuality() +1);
                     }
                     else{
                         item.setQuality(50);
                     }
                 }
-                else if(item.getNom() == "Backstage passes"){
-                    if(item.getQuality() < 50 && item.getSellin() > 10){
+                else if(item.getNom().equals("Backstage passes")){ //1
+                    if(item.getQuality() < 50 && item.getSellin() > 10){ //1 + 1
                         item.setQuality(item.getQuality() +1);
                     }
-                    else if(item.getQuality() < 49 && item.getSellin() <= 10 && item.getSellin() > 5){
+                    else if(item.getQuality() < 49 && item.getSellin() <= 10 && item.getSellin() > 5){ //1 + 1 + 1
                         item.setQuality(item.getQuality() +2);
                     }
-                    else if(item.getQuality() < 48 && item.getSellin() <= 5 && item.getSellin() > 0){
+                    else if(item.getQuality() < 48 && item.getSellin() <= 5 && item.getSellin() > 0){ //1 + 1 + 1
                         item.setQuality(item.getQuality() +3);
                     }
-                    else if(item.getSellin() == 0){
+                    else if(item.getSellin() == 0){ //1
                         item.setQuality(0);
                     }
                 }
-                else if(item.getLegendary() == 1){
+                else if(item.getLegendary() == 1){ //1
                     item.setQuality(item.getQuality());
                 }
                 else {
-                    if(item.getQuality() > 0){
+                    if(item.getQuality() > 0){ //1
                         item.setQuality(item.getQuality() -1);
                     }
                     else{
@@ -77,8 +78,8 @@ public class GildedRose {
                 }
             }
         }
-        for ( Item item : items) {
-            if(item.getLegendary() != 1){
+        for ( Item item : items) { //1
+            if(item.getLegendary() != 1){ //1
                 System.out.println(item.toString());
             }
             else{
