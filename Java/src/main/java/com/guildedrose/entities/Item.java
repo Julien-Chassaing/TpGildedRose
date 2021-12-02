@@ -1,11 +1,30 @@
 package com.guildedrose.entities;
 
-public class Item {
+public abstract class Item {
 
-    private String nom;
-    private int sellin;
-    private int quality;
-    private int legendary;
+    protected String nom;
+    protected int sellin;
+    protected int quality;
+
+    public Item(String name, int sellin, int quality) {
+        this.nom = name;
+        this.sellin = sellin;
+        this.quality = quality;
+    }
+
+    public abstract void update();
+
+    protected void CellQualityToFifty() {
+        if (this.quality > 50) {
+            this.quality = 50;
+        }
+    }
+
+    protected void FloorQualityToZero() {
+        if (this.quality < 0) {
+            this.quality = 0;
+        }
+    }
 
     public String getNom() {
         return nom;
@@ -31,9 +50,6 @@ public class Item {
         this.quality = quality;
     }
 
-    public int getLegendary() {return legendary; }
-
-    public void setLegendary(int legendary) {this.legendary = legendary; }
 
     @Override
     public String toString() {
