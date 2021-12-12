@@ -11,7 +11,6 @@ public class GenericItem extends Item {
     @Override
     public void update() {
         this.sellin --;
-        this.quality --;
 
         if (sellin < 0) {
             this.quality -= 2;

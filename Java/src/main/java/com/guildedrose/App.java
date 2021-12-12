@@ -9,6 +9,8 @@ public class App {
         //gr.shop();
         Shop shop = new Shop(new InMemoryRepository());
 
+        shop.updateQuality(2);
+
     }
 
 }

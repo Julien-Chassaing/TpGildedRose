@@ -11,11 +11,17 @@ public class Shop {
         this.repository = repository;
     }
 
-    public void updateQuality() {
+    public void updateQuality(int day) {
         ArrayList<Item> items = this.repository.GetInventory();
 
-        for (Item item : items) {
-            item.update();
+        for(int i = 0; i < day; i++){
+            for(Item item : items){
+                item.update();
+            }
+        }
+
+        for(Item item : items){
+           System.out.println(item);
         }
 
         this.repository.SaveInventory(items);
