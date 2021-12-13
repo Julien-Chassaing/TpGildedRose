@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class InMemoryRepository implements IInventoryRepository {
+    //fichier txt
     FileWriter fileWriter = new FileWriter("inventory.txt");
 
     ArrayList<Item> items = new ArrayList<Item>();
