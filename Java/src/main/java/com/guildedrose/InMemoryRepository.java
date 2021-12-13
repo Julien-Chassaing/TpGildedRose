@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class InMemoryRepository implements IInventoryRepository {
     FileWriter fileWriter = new FileWriter("inventory.txt");
-    String line = "";
 
     ArrayList<Item> items = new ArrayList<Item>();
 
@@ -33,8 +32,8 @@ public class InMemoryRepository implements IInventoryRepository {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("inventory.txt"));
             while ((line = bufferedReader.readLine()) != null)
             {
-                String[] employee = line.split(splitBy);
-                System.out.println("Employee [Item=" + employee[0] + ", Name=" + employee[1] + ", SellIn=" + employee[2] + ", Quality=" + employee[3] + "]");
+                String[] item = line.split(splitBy);
+                System.out.println("Employee [Item=" + item[0] + ", Name=" + item[1] + ", SellIn=" + item[2] + ", Quality=" + item[3] + "]");
             }
         } catch (Exception e) {
             e.printStackTrace();
