@@ -2,6 +2,7 @@ package com.guildedrose;
 
 import com.guildedrose.entities.Item;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Shop {
@@ -11,7 +12,7 @@ public class Shop {
         this.repository = repository;
     }
 
-    public void updateQuality(int day) {
+    public void updateQuality(int day){
         ArrayList<Item> items = this.repository.GetInventory();
 
         for(int i = 0; i < day; i++){
@@ -20,9 +21,10 @@ public class Shop {
             }
         }
 
-        for(Item item : items){
+        /*for(Item item : items){
            System.out.println(item);
-        }
+            System.out.println(item.getClass().getSimpleName());
+        }*/
 
         this.repository.SaveInventory(items);
     }
