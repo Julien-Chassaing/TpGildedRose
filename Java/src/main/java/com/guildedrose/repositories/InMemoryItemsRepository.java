@@ -14,10 +14,10 @@ public class InMemoryItemsRepository implements ItemsRepository {
     ArrayList<Item> items = new ArrayList<Item>();
 
     public InMemoryItemsRepository() {
-        items.add(new AgedItem("Aged Brie", 5, 5, 50));
-        items.add(new LegendaryItem("Sulfuras", 10, 1, 500));
-        items.add(new EventItem("Backstage passes", 10, 0, 20));
-        items.add(new GenericItem("Item normal", 7, 8, 5));
+        items.add(new AgedItem(1,"Aged Brie", 5, 5, 50));
+        items.add(new LegendaryItem(2,"Sulfuras", 10, 1, 500));
+        items.add(new EventItem(3,"Backstage passes", 10, 0, 20));
+        items.add(new GenericItem(4,"Item normal", 7, 8, 5));
     }
 
     @Override

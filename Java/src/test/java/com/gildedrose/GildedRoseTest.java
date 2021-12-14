@@ -2,7 +2,10 @@ package com.gildedrose;
 
 import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.items.*;
+import com.guildedrose.repositories.InMemoryBalanceRepository;
 import com.guildedrose.repositories.InMemoryItemsRepository;
+import com.guildedrose.shop.BalanceRepository;
+import com.guildedrose.shop.ShopInteractor;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -73,7 +76,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityGenericItem() {
-        GenericItem genericItem = new GenericItem("normal Item", 7, 8, 10);
+        GenericItem genericItem = new GenericItem(1,"normal Item", 7, 8, 10);
         genericItem.update();
 
         // Test SellIn
@@ -85,7 +88,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityIfSellInNegative() {
-        GenericItem genericItem = new GenericItem("normal Item", 0, 6, 53);
+        GenericItem genericItem = new GenericItem(2,"normal Item", 0, 6, 53);
         genericItem.update();
 
         // Test SellIn
@@ -99,7 +102,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityEventItem() {
-        EventItem eventItem = new EventItem("Backstage passes", 15, 30, 10);
+        EventItem eventItem = new EventItem(3,"Backstage passes", 15, 30, 10);
         eventItem.update();
 
         // Test SellIn
@@ -111,7 +114,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInBetween10And5() {
-        EventItem eventItem = new EventItem("Backstage passes", 8, 15, 20);
+        EventItem eventItem = new EventItem(4,"Backstage passes", 8, 15, 20);
         eventItem.update();
 
         assertEquals(17, eventItem.getQuality());
@@ -119,7 +122,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInBetween5And0() {
-        EventItem eventItem = new EventItem("Backstage passes", 4, 17, 15);
+        EventItem eventItem = new EventItem(5,"Backstage passes", 4, 17, 15);
         eventItem.update();
 
         assertEquals(20, eventItem.getQuality());
@@ -127,7 +130,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInInf0() {
-        EventItem eventItem = new EventItem("Backstage passes", 0, 30, 50);
+        EventItem eventItem = new EventItem(6,"Backstage passes", 0, 30, 50);
         eventItem.update();
 
         // Test SellIn
@@ -143,6 +146,14 @@ class GildedRoseTest {
         ArrayList<Item> items = shop.getInventory();
 
         assertNotNull(items);
+    }
+
+    @Test
+    void testSellItem() {
+        InventoryInteractor shop = new InventoryInteractor(new InMemoryItemsRepository());
+        ShopInteractor shopInteractor = new ShopInteractor(new InMemoryItemsRepository(), new InMemoryBalanceRepository());
+        shopInteractor.sellItem(3);
+
     }
 
 }

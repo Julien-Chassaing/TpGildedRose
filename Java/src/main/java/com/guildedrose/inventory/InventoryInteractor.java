@@ -28,7 +28,6 @@ public class InventoryInteractor implements InventoryUpdater, InventoryViewer{
 
     @Override
     public ArrayList<Item> getInventoryByQuantity() {
-        //ArrayList[] countQuantity = new ArrayList[];
         return null;
     }
 

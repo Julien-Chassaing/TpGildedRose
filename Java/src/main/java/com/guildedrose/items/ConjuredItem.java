@@ -6,6 +6,10 @@ public class ConjuredItem extends Item {
         super(name, sellin, quality, value);
     }
 
+    public ConjuredItem(int index, String name, int sellin, int quality, int value) {
+        super(index, name, sellin, quality, value);
+    }
+
     @Override
     public void update() {
         this.sellin--;

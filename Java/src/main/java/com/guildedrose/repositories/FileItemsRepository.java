@@ -24,21 +24,21 @@ public class FileItemsRepository implements ItemsRepository {
             while ((line = bufferedReader.readLine()) != null)
             {
                 String[] item = line.split(splitBy);
-                switch(item[0]) {
+                switch(item[1]) {
                     case "AgedItem":
-                        items.add(new AgedItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
+                        items.add(new AgedItem(Integer.parseInt(item[0]), item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
                     case "LegendaryItem":
-                        items.add(new LegendaryItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
+                        items.add(new LegendaryItem(Integer.parseInt(item[0]),item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
                     case "EventItem":
-                        items.add(new EventItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
+                        items.add(new EventItem(Integer.parseInt(item[0]),item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
                     case "GenericItem":
-                        items.add(new GenericItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
+                        items.add(new GenericItem(Integer.parseInt(item[0]),item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
                     case "ConjuredItem":
-                        items.add(new ConjuredItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
+                        items.add(new ConjuredItem(Integer.parseInt(item[0]),item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
                 }
             }
@@ -53,7 +53,7 @@ public class FileItemsRepository implements ItemsRepository {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("inventory.txt"));
             for (Item item : items) {
-                bw.write(String.format("%s,%s,%d,%d,%d", item.getClass().getSimpleName(), item.getName(), item.getSellin(), item.getQuality(), item.getValue()));
+                bw.write(String.format("%d,%s,%s,%d,%d,%d", item.getIndex(), item.getClass().getSimpleName(), item.getName(), item.getSellin(), item.getQuality(), item.getValue()));
                 bw.newLine();
             }
             bw.close();
