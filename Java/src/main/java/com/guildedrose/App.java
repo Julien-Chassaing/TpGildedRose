@@ -8,9 +8,6 @@ import com.guildedrose.items.Item;
 import com.guildedrose.repositories.FileBalanceRepository;
 import com.guildedrose.repositories.FileItemsRepository;
 import com.guildedrose.shop.ShopInteractor;
-import com.sun.javafx.binding.StringFormatter;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
