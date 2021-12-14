@@ -1,4 +1,4 @@
-AgedItem,Aged Brie,3,7
+AgedItem,Aged Brie,4,6
 LegendaryItem,Sulfuras,10,1
-EventItem,Backstage passes,8,4
-GenericItem,Item normal,5,6
+EventItem,Backstage passes,9,2
+GenericItem,Item normal,6,7

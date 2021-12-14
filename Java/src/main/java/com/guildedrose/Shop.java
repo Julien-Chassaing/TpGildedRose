@@ -21,11 +21,6 @@ public class Shop {
             }
         }
 
-        /*for(Item item : items){
-           System.out.println(item);
-            System.out.println(item.getClass().getSimpleName());
-        }*/
-
         this.repository.SaveInventory(items);
     }
 }

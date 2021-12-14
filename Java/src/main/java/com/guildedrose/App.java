@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         Shop shop = new Shop(new InMemoryRepository());
 
-        shop.updateQuality(2);
+        shop.updateQuality(1);
     }
 
 }
