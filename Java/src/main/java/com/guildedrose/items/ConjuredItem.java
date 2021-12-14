@@ -1,11 +1,9 @@
 package com.guildedrose.items;
 
-import com.guildedrose.entities.Item;
-
 public class ConjuredItem extends Item {
 
-    public ConjuredItem(String name, int sellin, int quality) {
-        super(name, sellin, quality);
+    public ConjuredItem(String name, int sellin, int quality, int value) {
+        super(name, sellin, quality, value);
     }
 
     @Override

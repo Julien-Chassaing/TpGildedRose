@@ -1,15 +1,17 @@
-package com.guildedrose.entities;
+package com.guildedrose.items;
 
 public abstract class Item {
 
-    protected String nom;
+    protected String name;
     protected int sellin;
     protected int quality;
+    protected int value;
 
-    public Item(String name, int sellin, int quality) {
-        this.nom = name;
+    public Item(String name, int sellin, int quality, int value) {
+        this.name = name;
         this.sellin = sellin;
         this.quality = quality;
+        this.value = value;
     }
 
     public abstract void update();
@@ -26,12 +28,12 @@ public abstract class Item {
         }
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSellin() {
@@ -50,20 +52,22 @@ public abstract class Item {
         this.quality = quality;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
 
     @Override
     public String toString() {
         return "Item{" +
-                "nom='" + nom + '\'' +
+                "nom='" + name + '\'' +
                 ", sellin=" + sellin +
                 ", quality=" + quality +
-                '}';
-    }
-
-    public String toStringLeg() {
-        return "Item{" +
-                "nom='" + nom + '\'' +
-                ", quality=" + quality +
+                ", value=" + value +
                 '}';
     }
 }

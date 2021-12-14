@@ -1,10 +1,10 @@
-package com.guildedrose;
+package com.guildedrose.inventory;
 
-import com.guildedrose.entities.Item;
+import com.guildedrose.items.Item;
 
 import java.util.ArrayList;
 
-public interface IInventoryRepository {
+public interface ItemsRepository {
     ArrayList<Item> GetInventory();
 
     void SaveInventory(ArrayList<Item> items);

@@ -1,28 +1,17 @@
-package com.guildedrose;
+package com.guildedrose.repositories;
 
-import com.guildedrose.entities.Item;
+import com.guildedrose.inventory.ItemsRepository;
+import com.guildedrose.items.Item;
 import com.guildedrose.items.*;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class InMemoryRepository implements IInventoryRepository {
-    //fichier txt
-    File file;
-
+public class FileItemsRepository implements ItemsRepository {
 
     ArrayList<Item> items = new ArrayList<Item>();
 
-    public InMemoryRepository() throws IOException {
-        if (file.exists()) {
-            FileWriter fileWriter = new FileWriter("inventory.txt");
-            items.add(new AgedItem("Aged Brie", 5, 5));
-            items.add(new LegendaryItem("Sulfuras", 10, 1));
-            items.add(new EventItem("Backstage passes", 10, 0));
-            items.add(new GenericItem("Item normal", 7, 8));
-
-            SaveInventory(items);
-        }
+    public FileItemsRepository(){
     }
 
     @Override
@@ -37,19 +26,19 @@ public class InMemoryRepository implements IInventoryRepository {
                 String[] item = line.split(splitBy);
                 switch(item[0]) {
                     case "AgedItem":
-                        items.add(new AgedItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3])));
+                        items.add(new AgedItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
                         break;
                     case "LegendaryItem":
-                        items.add(new LegendaryItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3])));
+                        items.add(new LegendaryItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
                         break;
                     case "EventItem":
-                        items.add(new EventItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3])));
+                        items.add(new EventItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
                         break;
                     case "GenericItem":
-                        items.add(new GenericItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3])));
+                        items.add(new GenericItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
                         break;
                     case "ConjuredItem":
-                        items.add(new ConjuredItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3])));
+                        items.add(new ConjuredItem(item[1], Integer.parseInt(item[2]), Integer.parseInt(item[3]), Integer.parseInt(item[4])));
                         break;
                 }
             }
@@ -64,13 +53,12 @@ public class InMemoryRepository implements IInventoryRepository {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("inventory.txt"));
             for (Item item : items) {
-                bw.write(String.format("%s,%s,%d,%d", item.getClass().getSimpleName(), item.getNom(), item.getSellin(), item.getQuality()));
+                bw.write(String.format("%s,%s,%d,%d,%d", item.getClass().getSimpleName(), item.getName(), item.getSellin(), item.getQuality(), item.getValue()));
                 bw.newLine();
             }
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.items = items;
     }
 }

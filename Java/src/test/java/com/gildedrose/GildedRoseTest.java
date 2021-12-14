@@ -1,9 +1,13 @@
 package com.gildedrose;
 
+import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.items.*;
+import com.guildedrose.repositories.InMemoryItemsRepository;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {
 
@@ -11,7 +15,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityAgedItem() {
-        AgedItem agedItem = new AgedItem("Aged Brie", 5, 8);
+        AgedItem agedItem = new AgedItem("Aged Brie", 5, 8, 10);
         agedItem.update();
 
         // Test SellIn
@@ -23,7 +27,7 @@ class GildedRoseTest {
 
     @Test
     void testMaxQualityAgedItem() {
-        AgedItem agedItem = new AgedItem("Aged Brie", 10, 50);
+        AgedItem agedItem = new AgedItem("Aged Brie", 10, 50, 5);
         agedItem.update();
 
         assertEquals(50, agedItem.getQuality());
@@ -33,7 +37,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityConjuredItem() {
-        ConjuredItem conjuredItem = new ConjuredItem("Conjured", 10, 15);
+        ConjuredItem conjuredItem = new ConjuredItem("Conjured", 10, 15, 10);
         conjuredItem.update();
 
         // Test SellIn
@@ -45,7 +49,7 @@ class GildedRoseTest {
 
     @Test
     void testMinQualityConjuredItem() {
-        ConjuredItem conjuredItem = new ConjuredItem("Conjured", 10, 1);
+        ConjuredItem conjuredItem = new ConjuredItem("Conjured", 10, 1, 20);
         conjuredItem.update();
 
         assertEquals(0, conjuredItem.getQuality());
@@ -55,7 +59,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityLegendayItem() {
-        LegendaryItem legendaryItem = new LegendaryItem("Sulfuras", 10, 15);
+        LegendaryItem legendaryItem = new LegendaryItem("Sulfuras", 10, 15, 15);
         legendaryItem.update();
 
         // Test SellIn
@@ -69,7 +73,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityGenericItem() {
-        GenericItem genericItem = new GenericItem("normal Item", 7, 8);
+        GenericItem genericItem = new GenericItem("normal Item", 7, 8, 10);
         genericItem.update();
 
         // Test SellIn
@@ -81,7 +85,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityIfSellInNegative() {
-        GenericItem genericItem = new GenericItem("normal Item", 0, 6);
+        GenericItem genericItem = new GenericItem("normal Item", 0, 6, 53);
         genericItem.update();
 
         // Test SellIn
@@ -95,7 +99,7 @@ class GildedRoseTest {
 
     @Test
     void testSellInAndQualityEventItem() {
-        EventItem eventItem = new EventItem("Backstage passes", 15, 30);
+        EventItem eventItem = new EventItem("Backstage passes", 15, 30, 10);
         eventItem.update();
 
         // Test SellIn
@@ -107,7 +111,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInBetween10And5() {
-        EventItem eventItem = new EventItem("Backstage passes", 8, 15);
+        EventItem eventItem = new EventItem("Backstage passes", 8, 15, 20);
         eventItem.update();
 
         assertEquals(17, eventItem.getQuality());
@@ -115,7 +119,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInBetween5And0() {
-        EventItem eventItem = new EventItem("Backstage passes", 4, 17);
+        EventItem eventItem = new EventItem("Backstage passes", 4, 17, 15);
         eventItem.update();
 
         assertEquals(20, eventItem.getQuality());
@@ -123,7 +127,7 @@ class GildedRoseTest {
 
     @Test
     void testQualityWhenSellInInf0() {
-        EventItem eventItem = new EventItem("Backstage passes", 0, 30);
+        EventItem eventItem = new EventItem("Backstage passes", 0, 30, 50);
         eventItem.update();
 
         // Test SellIn
@@ -132,4 +136,13 @@ class GildedRoseTest {
         // Test Quality
         assertEquals(0, eventItem.getQuality());
     }
+
+    @Test
+    void testGetInventory() {
+        InventoryInteractor shop = new InventoryInteractor(new InMemoryItemsRepository());
+        ArrayList<Item> items = shop.getInventory();
+
+        assertNotNull(items);
+    }
+
 }

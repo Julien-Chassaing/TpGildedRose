@@ -1,11 +1,9 @@
 package com.guildedrose.items;
 
-import com.guildedrose.entities.Item;
-
 public class GenericItem extends Item {
 
-    public GenericItem(String name, int sellin, int quality) {
-        super(name, sellin, quality);
+    public GenericItem(String name, int sellin, int quality, int value) {
+        super(name, sellin, quality, value);
     }
 
     @Override
