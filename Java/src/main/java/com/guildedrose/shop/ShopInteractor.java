@@ -1,16 +1,18 @@
 package com.guildedrose.shop;
 
+import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.inventory.ItemsRepository;
 import com.guildedrose.items.*;
 
 import java.util.ArrayList;
 
-public class ShopInteractor implements ShopBuy, ShopSell {
+public class ShopInteractor implements ShopBuy, ShopSell, ItemsRepository, BalanceRepository {
 
     private ItemsRepository inventoryRepository;
     private BalanceRepository balanceRepository;
 
     public ShopInteractor(ItemsRepository inventoryRepository, BalanceRepository balanceRepository) {
+        super();
         this.inventoryRepository = inventoryRepository;
         this.balanceRepository = balanceRepository;
     }
@@ -21,7 +23,7 @@ public class ShopInteractor implements ShopBuy, ShopSell {
         Item item = createItem(items, typeItem, name,sellIn,quality,value);
         items.add(item);
         inventoryRepository.SaveInventory(items);
-        int balance = balanceRepository.GetBalance();
+        double balance = balanceRepository.GetBalance();
         balance = balance - item.getValue();
         balanceRepository.SaveBalance(balance);
     }
@@ -29,7 +31,7 @@ public class ShopInteractor implements ShopBuy, ShopSell {
     @Override
     public void sellItem(int index) {
         ArrayList<Item> items = inventoryRepository.GetInventory();
-        int balance = balanceRepository.GetBalance();
+        double balance = balanceRepository.GetBalance();
         for(Item item : items){
             if (item.getIndex() == index)
                 balance = balance + item.getValue();
@@ -49,6 +51,26 @@ public class ShopInteractor implements ShopBuy, ShopSell {
         return result;
     }
 
+    @Override
+    public double GetBalance() {
+        return balanceRepository.GetBalance();
+    }
+
+    @Override
+    public void SaveBalance(double balance) {
+        balanceRepository.SaveBalance(balance);
+    }
+
+    @Override
+    public ArrayList<Item> GetInventory() {
+        return inventoryRepository.GetInventory();
+    }
+
+    @Override
+    public void SaveInventory(ArrayList<Item> items) {
+        inventoryRepository.SaveInventory(items);
+    }
+
     private Item createItem(ArrayList<Item> items, String typeItem, String name, int sellIn, int quality, int value){
         Item item = null;
         switch (typeItem) {
@@ -66,6 +88,9 @@ public class ShopInteractor implements ShopBuy, ShopSell {
                 break;
             case "ConjuredItem":
                 item = new ConjuredItem(getMaxIndex(items)+1, name, sellIn, quality, value);
+                break;
+            case "RelicItem":
+                item = new RelicItem(getMaxIndex(items)+1, name, quality, value);
                 break;
         }
         return item;

@@ -5,11 +5,14 @@ import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.inventory.InventoryUpdater;
 import com.guildedrose.inventory.InventoryViewer;
 import com.guildedrose.items.Item;
+import com.guildedrose.items.RelicItem;
 import com.guildedrose.repositories.FileBalanceRepository;
 import com.guildedrose.repositories.FileItemsRepository;
 import com.guildedrose.shop.ShopInteractor;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class App {
 
@@ -45,7 +48,7 @@ public class App {
 
                 case 2:
                     System.out.println("Inventaire par quantité : ");
-                    System.out.println();
+                    DisplayInventoryByCountCommand();
                     break;
 
                 case 3:
@@ -111,12 +114,20 @@ public class App {
     public static void DisplayInventoryCommand(){
         InventoryViewer inventoryViewer = new InventoryInteractor(new FileItemsRepository());
         for (Item item : inventoryViewer.getInventory()) {
-            System.out.printf("Index=%d, Name=%s, SellIn=%d, Quality=%d, Value=%d %n", item.getIndex(), item.getName(), item.getSellin(), item.getQuality(), item.getValue());
+            if(item instanceof RelicItem) {
+                System.out.printf("Index=%d, Name=%s, Quality=%,.2f, Value=%d %n", item.getIndex(), item.getName(), item.getQuality(), item.getValue());
+            }
+            else {
+                System.out.printf("Index=%d, Name=%s, SellIn=%d, Quality=%,.2f, Value=%d %n", item.getIndex(), item.getName(), item.getSellin(), item.getQuality(), item.getValue());
+            }
         }
     }
     public static void DisplayInventoryByCountCommand() throws IOException {
         InventoryViewer inventoryViewer = new InventoryInteractor(new FileItemsRepository());
-        inventoryViewer.getInventoryByQuantity();
+        Stream<Map.Entry<String, Long>> sortedByQuantity = inventoryViewer.getInventoryByQuantity();
+
+        //Stream<Map.Entry<String, Long>> sortedByQuantity = inventoryViewer.getInventoryByQuantity();
+        sortedByQuantity.forEach((k) -> System.out.println("Item: " + k.getKey() + ", Quantity: " + k.getValue()));
     }
     public static void UpdateInventoryCommand(){
         InventoryUpdater inventoryUpdater = new InventoryInteractor(new FileItemsRepository());

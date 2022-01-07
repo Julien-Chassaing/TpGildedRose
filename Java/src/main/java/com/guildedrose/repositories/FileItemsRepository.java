@@ -40,6 +40,9 @@ public class FileItemsRepository implements ItemsRepository {
                     case "ConjuredItem":
                         items.add(new ConjuredItem(Integer.parseInt(item[0]),item[2], Integer.parseInt(item[3]), Integer.parseInt(item[4]), Integer.parseInt(item[5])));
                         break;
+                    case "RelicItem":
+                        items.add(new RelicItem(Integer.parseInt(item[0]), item[2], Integer.parseInt(item[4]), Integer.parseInt(item[4])));
+                        break;
                 }
             }
         } catch (Exception e) {

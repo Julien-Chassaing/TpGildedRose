@@ -8,7 +8,7 @@ import java.nio.Buffer;
 
 public class FileBalanceRepository implements BalanceRepository {
     @Override
-    public int GetBalance() {
+    public double GetBalance() {
         String line = "";
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("balance.txt"));
@@ -16,14 +16,14 @@ public class FileBalanceRepository implements BalanceRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Integer.parseInt(line);
+        return Double.parseDouble(line.replace(",", "."));
     }
 
     @Override
-    public void SaveBalance(int balance) {
+    public void SaveBalance(double balance) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("balance.txt"));
-            bw.write(String.format("%d", balance));
+            bw.write(String.format("%.2f", balance));
 
             bw.close();
         } catch (Exception e) {

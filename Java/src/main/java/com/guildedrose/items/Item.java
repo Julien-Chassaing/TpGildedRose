@@ -1,11 +1,15 @@
 package com.guildedrose.items;
 
+import com.guildedrose.repositories.FileBalanceRepository;
+
 public abstract class Item {
+
+    FileBalanceRepository fileBalanceRepository = new FileBalanceRepository();
 
     protected int index;
     protected String name;
     protected int sellin;
-    protected int quality;
+    protected double quality;
     protected int value;
 
     public Item(String name, int sellin, int quality, int value) {
@@ -23,6 +27,13 @@ public abstract class Item {
         this.value = value;
     }
 
+    public Item(int index, String name, double quality, int value) {
+        this.index = index;
+        this.name = name;
+        this.quality = quality;
+        this.value = value;
+    }
+
     public abstract void update();
 
     protected void CellQualityToFifty() {
@@ -35,6 +46,18 @@ public abstract class Item {
         if (this.quality < 0) {
             this.quality = 0;
         }
+    }
+
+    protected void CellQualityToHundred() {
+        if (this.quality >= 100) {
+            this.quality = 100;
+        }
+    }
+
+    protected void AddRelicPriceToBalance() {
+        double balance = fileBalanceRepository.GetBalance();
+        double newValue = (this.getQuality() / 1000) * this.getValue();
+        fileBalanceRepository.SaveBalance(balance + Math.floor(newValue));
     }
 
     public int getIndex() {
@@ -61,7 +84,7 @@ public abstract class Item {
         this.sellin = sellin;
     }
 
-    public int getQuality() {
+    public double getQuality() {
         return quality;
     }
 

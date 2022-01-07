@@ -2,7 +2,7 @@ package com.guildedrose.shop;
 
 
 public interface BalanceRepository {
-    int GetBalance();
+    double GetBalance();
 
-    void SaveBalance(int balance);
+    void SaveBalance(double balance);
 }

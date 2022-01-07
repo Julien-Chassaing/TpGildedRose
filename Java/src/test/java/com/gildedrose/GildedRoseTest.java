@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.guildedrose.balance.BalanceInteractor;
 import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.items.*;
 import com.guildedrose.repositories.InMemoryBalanceRepository;
@@ -141,19 +142,23 @@ class GildedRoseTest {
     }
 
     @Test
-    void testGetInventory() {
-        InventoryInteractor shop = new InventoryInteractor(new InMemoryItemsRepository());
-        ArrayList<Item> items = shop.getInventory();
+    void testQualityRelic() {
+        RelicItem relicItem = new RelicItem(7, "Relic", 10, 50);
+        relicItem.update();
 
-        assertNotNull(items);
+        // Test Quality
+        assertEquals(10.5, relicItem.getQuality());
     }
 
     @Test
-    void testSellItem() {
-        InventoryInteractor shop = new InventoryInteractor(new InMemoryItemsRepository());
-        ShopInteractor shopInteractor = new ShopInteractor(new InMemoryItemsRepository(), new InMemoryBalanceRepository());
-        shopInteractor.sellItem(3);
+    void testQualityRelicOver100() {
+        RelicItem relicItem = new RelicItem(7, "Relic", 99, 50);
+        relicItem.update();
 
+        // Test Quality
+        assertEquals(100, relicItem.getQuality());
     }
+
+
 
 }
