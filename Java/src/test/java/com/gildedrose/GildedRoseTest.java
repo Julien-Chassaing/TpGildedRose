@@ -1,15 +1,9 @@
 package com.gildedrose;
 
-import com.guildedrose.balance.BalanceInteractor;
-import com.guildedrose.inventory.InventoryInteractor;
+
 import com.guildedrose.items.*;
-import com.guildedrose.repositories.InMemoryBalanceRepository;
-import com.guildedrose.repositories.InMemoryItemsRepository;
-import com.guildedrose.shop.BalanceRepository;
-import com.guildedrose.shop.ShopInteractor;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

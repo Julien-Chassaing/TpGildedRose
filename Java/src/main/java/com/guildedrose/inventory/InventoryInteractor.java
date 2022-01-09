@@ -1,7 +1,6 @@
 package com.guildedrose.inventory;
 
 import com.guildedrose.items.Item;
-import com.guildedrose.items.RelicItem;
 
 import java.util.*;
 import java.util.stream.Collectors;

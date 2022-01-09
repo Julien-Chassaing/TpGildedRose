@@ -1,6 +1,5 @@
 package com.guildedrose.shop;
 
-import com.guildedrose.inventory.InventoryInteractor;
 import com.guildedrose.inventory.ItemsRepository;
 import com.guildedrose.items.*;
 

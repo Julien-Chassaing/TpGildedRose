@@ -9,14 +9,13 @@ import com.guildedrose.items.RelicItem;
 import com.guildedrose.repositories.FileBalanceRepository;
 import com.guildedrose.repositories.FileItemsRepository;
 import com.guildedrose.shop.ShopInteractor;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         int choice = 0;
         Scanner scanner = new Scanner(System.in);
@@ -122,11 +121,10 @@ public class App {
             }
         }
     }
-    public static void DisplayInventoryByCountCommand() throws IOException {
+    public static void DisplayInventoryByCountCommand() {
         InventoryViewer inventoryViewer = new InventoryInteractor(new FileItemsRepository());
         Stream<Map.Entry<String, Long>> sortedByQuantity = inventoryViewer.getInventoryByQuantity();
 
-        //Stream<Map.Entry<String, Long>> sortedByQuantity = inventoryViewer.getInventoryByQuantity();
         sortedByQuantity.forEach((k) -> System.out.println("Item: " + k.getKey() + ", Quantity: " + k.getValue()));
     }
     public static void UpdateInventoryCommand(){

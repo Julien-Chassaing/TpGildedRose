@@ -1,15 +1,10 @@
 package com.gildedrose.Balance;
 
-import com.guildedrose.balance.BalanceInteractor;
-import com.guildedrose.inventory.InventoryInteractor;
-import com.guildedrose.items.AgedItem;
+
 import com.guildedrose.items.EventItem;
 import com.guildedrose.items.Item;
-import com.guildedrose.items.RelicItem;
-import com.guildedrose.repositories.FileBalanceRepository;
 import com.guildedrose.repositories.InMemoryBalanceRepository;
 import com.guildedrose.repositories.InMemoryItemsRepository;
-import com.guildedrose.shop.BalanceRepository;
 import com.guildedrose.shop.ShopInteractor;
 import org.junit.jupiter.api.Test;
 
